@@ -1,0 +1,18 @@
+{
+  "name": "goal-setter-app",
+  "version": "1.0.0",
+  "description": "This is a goal setter app made with MERN Stack",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "nodemon backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Asfand Ali Khan",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.0"
+  }
+}
