@@ -1,10 +1,11 @@
 const Goals = require("../models/goalsModel.js");
+const asyncHandler = require("express-async-handler");
 
-const getGoals = async (req, res) => {
+const getGoals = asyncHandler(async (req, res) => {
   const goals = await Goals.find();
   res.status(200).json(goals);
-};
-const setGoals = async (req, res) => {
+});
+const setGoals = asyncHandler(async (req, res) => {
   if (!req.body.text) {
     res.status(400);
     throw new Error("Please add text field");
@@ -15,8 +16,8 @@ const setGoals = async (req, res) => {
   });
 
   res.status(200).json(goal);
-};
-const updateGoal = async (req, res) => {
+});
+const updateGoal = asyncHandler(async (req, res) => {
   const goal = await Goals.findById(req.params.id);
 
   if (!goal) {
@@ -28,8 +29,8 @@ const updateGoal = async (req, res) => {
     new: true,
   });
   res.status(200).json(updatedGoal);
-};
-const deleteGoal = async (req, res) => {
+});
+const deleteGoal = asyncHandler(async (req, res) => {
   const goal = await Goals.findById(req.params.id);
   if (!goal) {
     res.status(401);
@@ -38,7 +39,7 @@ const deleteGoal = async (req, res) => {
 
   await goal.remove();
   res.status(200).json({ id: req.params.id });
-};
+});
 
 module.exports = {
   getGoals,
