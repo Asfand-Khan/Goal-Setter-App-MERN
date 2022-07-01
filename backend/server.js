@@ -21,7 +21,10 @@ app.use(errorHandler);
 const PORT = 4500 || process.env.PORT;
 
 // routes
+// goals routes
 app.use("/api/goals", require("./routes/goalsRouter.js"));
+// users routes
+app.use("/api/users", require("./routes/usersRouter"));
 
 // app listener
 app.listen(PORT, () => {
