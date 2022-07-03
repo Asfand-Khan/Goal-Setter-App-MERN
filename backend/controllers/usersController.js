@@ -62,7 +62,14 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 const getUser = asyncHandler(async (req, res) => {
-  res.status(200).json(req.user);
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    res.status(401);
+    throw new Error("Unauthorized user");
+  } else {
+    res.status(200).json(user);
+  }
 });
 
 const generateToken = (id) => {
