@@ -68,7 +68,7 @@ const getUser = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("Unauthorized user");
   } else {
-    res.status(200).json(user);
+    res.status(200).json({ _id: user.id, name: user.name, email: user.email });
   }
 });
 
