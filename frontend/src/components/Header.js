@@ -1,8 +1,20 @@
 import React from "react";
 import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, reset } from "../features/auth/auth";
 
 const Header = () => {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logOut = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    dispatch(reset());
+    navigate("/login");
+  };
   return (
     <div>
       <header className="header">
@@ -10,24 +22,26 @@ const Header = () => {
           <Link to="/">GoalSetter</Link>
         </div>
         <ul>
-          <li>
-            <button className="btn">
-              <FaSignOutAlt /> Logout
-            </button>
-          </li>
-
-          <>
+          {user ? (
             <li>
-              <Link to="/login">
-                <FaSignInAlt /> Login
-              </Link>
+              <button className="btn" onClick={logOut}>
+                <FaSignOutAlt /> Logout
+              </button>
             </li>
-            <li>
-              <Link to="/register">
-                <FaUser /> Register
-              </Link>
-            </li>
-          </>
+          ) : (
+            <>
+              <li>
+                <Link to="/login">
+                  <FaSignInAlt /> Login
+                </Link>
+              </li>
+              <li>
+                <Link to="/register">
+                  <FaUser /> Register
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </header>
     </div>
