@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../components/Spinner";
 
 const Dashboard = () => {
-  const { user, isSuccess } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  return user && isSuccess ? <div>Dashboard</div> : navigate("/login");
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [navigate, user]);
+  return <div>Dashboard</div>;
 };
 
 export default Dashboard;

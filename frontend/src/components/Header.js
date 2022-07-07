@@ -19,7 +19,7 @@ const Header = () => {
     <div>
       <header className="header">
         <div className="logo">
-          <Link to="/dashboard">GoalSetter</Link>
+          <Link to="/">GoalSetter</Link>
         </div>
         <ul>
           {user ? (
@@ -31,7 +31,7 @@ const Header = () => {
           ) : (
             <>
               <li>
-                <Link to="/">
+                <Link to="/login">
                   <FaSignInAlt /> Login
                 </Link>
               </li>
